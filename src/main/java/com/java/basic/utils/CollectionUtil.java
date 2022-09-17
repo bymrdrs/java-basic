@@ -162,6 +162,19 @@ public class CollectionUtil {
                                 Comparator.comparing(person -> person.getName() + "#" + person.getAge()))), ArrayList::new));
     }
 
+    /**
+     * 基于Lambda的for循环
+     */
+    public static void listLambdaForeach() {
+        List<String> list = new ArrayList();
+        list.add("张三");
+        list.add("李四");
+        list.add("王五");
+        list.stream().forEach(string -> {
+            System.out.println(string);
+        });
+    }
+
     static List<String> listString() {
         List<String> list = new ArrayList<>();
         list.add("1");
@@ -214,6 +227,7 @@ public class CollectionUtil {
         System.out.println(CollectionUtil.collectionRemoveValue(CollectionUtil.collectionPerson()));
         System.out.println(CollectionUtil.listPersonDistinct(CollectionUtil.listPerson()));
         System.out.println(CollectionUtil.listPersonMultiFieldDistinct(CollectionUtil.listPerson()));
+        CollectionUtil.listLambdaForeach();
     }
 
 }
