@@ -20,9 +20,9 @@ public class DateUtil {
     /**
      * String转Date
      */
-    public static Date stringToDate() throws ParseException {
+    public static Date stringToDate(String s) throws ParseException {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = simpleDateFormat.parse("2019-09-02");
+        Date date = simpleDateFormat.parse(s);
         return date;
     }
 
@@ -45,7 +45,7 @@ public class DateUtil {
 
     public static void main(String[] args) throws ParseException {
         System.out.println(DateUtil.dateformat());
-        System.out.println(DateUtil.stringToDate());
+        System.out.println(DateUtil.stringToDate("2019-09-02"));
         System.out.println(DateUtil.dataToTimestamp());
         System.out.println(DateUtil.timestampToData());
     }

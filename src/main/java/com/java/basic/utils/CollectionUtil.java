@@ -1,6 +1,7 @@
 package com.java.basic.utils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -32,11 +33,8 @@ public class CollectionUtil {
     /**
      * List中的每个元素都加上单引号并用逗号隔开
      */
-    public static String ListToStringAddApostropheAndCommaSeparated() {
-        List<String> list = new ArrayList<>();
-        list.add("110");
-        list.add("120");
-        return list.stream().map(s -> "'" + s + "'").collect(Collectors.joining(","));
+    public static String ListToStringAddApostropheAndCommaSeparated(List<String> list) {
+        return list.stream().map(s -> "\'" + s + "\'").collect(Collectors.joining(","));
     }
 
     /**
@@ -61,6 +59,18 @@ public class CollectionUtil {
         list1.retainAll(list2); // 交集
 
         list1.removeAll(list2); // 差集
+    }
+
+    public static void main(String[] args) {
+        System.out.println(CollectionUtil.listDistinct(Arrays.asList("1", "2", "2")));
+        List<String> list = new ArrayList<>();
+        list.add("1");
+        list.add("2");
+        list.add("3");
+        list.add(null);
+        System.out.println(CollectionUtil.listFilerNull(list));
+        System.out.println(CollectionUtil.listStringToInteger(Arrays.asList("1", "2", "2")));
+        System.out.println(CollectionUtil.ListToStringAddApostropheAndCommaSeparated(Arrays.asList("1", "2", "2")));
     }
 
 }
