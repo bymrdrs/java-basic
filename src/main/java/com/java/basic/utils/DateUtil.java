@@ -3,6 +3,8 @@ package com.java.basic.utils;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 
 public class DateUtil {
@@ -43,11 +45,22 @@ public class DateUtil {
         return d;
     }
 
+    /**
+     * Date转LocalDateTime
+     */
+    public static LocalDateTime dateToLocalDateTime() {
+        LocalDateTime ldt = new Date().toInstant()
+                .atZone(ZoneId.systemDefault())
+                .toLocalDateTime();
+        return ldt;
+    }
+
     public static void main(String[] args) throws ParseException {
         System.out.println(DateUtil.dateformat());
         System.out.println(DateUtil.stringToDate("2019-09-02"));
         System.out.println(DateUtil.dataToTimestamp());
         System.out.println(DateUtil.timestampToData());
+        System.out.println(DateUtil.dateToLocalDateTime());
     }
 
 }
