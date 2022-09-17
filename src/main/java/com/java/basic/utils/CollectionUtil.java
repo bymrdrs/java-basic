@@ -33,14 +33,14 @@ public class CollectionUtil {
     /**
      * List中的每个元素都加上单引号并用逗号隔开
      */
-    public static String ListToStringAddApostropheAndCommaSeparated(List<String> list) {
+    public static String listToStringAddApostropheAndCommaSeparated(List<String> list) {
         return list.stream().map(s -> "\'" + s + "\'").collect(Collectors.joining(","));
     }
 
     /**
      * List的并集、去重复并集、交集和差集
      */
-    public static void ListUnionAndDeduplicateUnionAndIntersectionAndDifference() {
+    public static void listUnionAndDeduplicateUnionAndIntersectionAndDifference() {
         List<String> list1 = new ArrayList<>();
         list1.add("A");
         list1.add("B");
@@ -61,6 +61,27 @@ public class CollectionUtil {
         list1.removeAll(list2); // 差集
     }
 
+    /**
+     * List转换为Array
+     */
+    public static String[] listToArray(List<String> list) {
+        return list.toArray(new String[list.size()]);
+    }
+
+    /**
+     * List转换为Array Stream
+     */
+    public static String[] listToArrayByStream(List<String> list) {
+        return list.stream().toArray(String[]::new);
+    }
+
+    /**
+     * List转换为逗号分隔的字符串
+     */
+    public static String listToStringAndCommaSeparated(List<String> list) {
+        return String.join(",", list);
+    }
+
     public static void main(String[] args) {
         System.out.println(CollectionUtil.listDistinct(Arrays.asList("1", "2", "2")));
         List<String> list = new ArrayList<>();
@@ -69,8 +90,11 @@ public class CollectionUtil {
         list.add("3");
         list.add(null);
         System.out.println(CollectionUtil.listFilerNull(list));
-        System.out.println(CollectionUtil.listStringToInteger(Arrays.asList("1", "2", "2")));
-        System.out.println(CollectionUtil.ListToStringAddApostropheAndCommaSeparated(Arrays.asList("1", "2", "2")));
+        System.out.println(CollectionUtil.listStringToInteger(Arrays.asList("1", "2", "3")));
+        System.out.println(CollectionUtil.listToStringAddApostropheAndCommaSeparated(Arrays.asList("1", "2", "3")));
+        System.out.println(Arrays.toString(CollectionUtil.listToArray(Arrays.asList("1", "2", "3"))));
+        System.out.println(Arrays.toString(CollectionUtil.listToArrayByStream(Arrays.asList("1", "2", "3"))));
+        System.out.println(CollectionUtil.listToStringAndCommaSeparated(Arrays.asList("Milan", "London", "New York", "San Francisco")));
     }
 
 }

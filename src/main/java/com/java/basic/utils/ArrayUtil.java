@@ -1,6 +1,8 @@
 package com.java.basic.utils;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -45,12 +47,28 @@ public class ArrayUtil {
         return Arrays.asList(strings).contains(targetValue);
     }
 
+    /**
+     * Array转换为List
+     */
+    public static List<String> arrayToList(String[] strings) {
+        return Arrays.asList(strings);
+    }
+
+    /**
+     * Array转换为List 流
+     */
+    public static List<String> arrayToListByStream(String[] strings) {
+        return Stream.of(strings).collect(Collectors.toList());
+    }
+
     public static void main(String[] args) {
         System.out.println(Arrays.toString(ArrayUtil.arrayDeleteNull(new String[]{"test1", "", "test2", "test4", "", null})));
         System.out.println(Arrays.toString(ArrayUtil.arrayIntToString(new String[]{"1", "2", "3"})));
         System.out.println(Arrays.toString(ArrayUtil.arrayIntToInteger(new int[]{1, 2, 3})));
         System.out.println(Arrays.toString(ArrayUtil.arrayDistinct(new int[]{1, 2, 3, 3})));
         System.out.println(ArrayUtil.arrayContains(new String[]{"1", "2", "3"}, "2"));
+        System.out.println(ArrayUtil.arrayToList(new String[]{"a", "b", "c"}));
+        System.out.println(ArrayUtil.arrayToListByStream(new String[]{"a", "b", "c"}));
     }
 
 }
