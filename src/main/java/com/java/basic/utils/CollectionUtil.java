@@ -97,9 +97,9 @@ public class CollectionUtil {
      * List的排序、求和、取最大值和按照条件过滤
      */
     public static void sortAndSumAndMaxAndFilterOfList() {
-        Person p1 = new Person("麻子", 31);
-        Person p2 = new Person("李四", 20);
-        Person p3 = new Person("王五", 26);
+        Person p1 = new Person("麻子", 31, "");
+        Person p2 = new Person("李四", 20, "");
+        Person p3 = new Person("王五", 26, "");
 
         List<Person> personList = new ArrayList<Person>();
         personList.add(p1);
@@ -133,6 +133,16 @@ public class CollectionUtil {
         int sum = personList.stream().mapToInt(person -> person.getAge()).sum();
     }
 
+    /**
+     * 集合中removeIf的使用
+     */
+    public static Collection<Person> collectionRemoveValue(Collection<Person> collection) {
+        collection.removeIf(
+                person -> person.getAge() >= 30
+        );
+        return collection;
+    }
+
 
     static List<String> listString() {
         List<String> list = new ArrayList<>();
@@ -151,6 +161,16 @@ public class CollectionUtil {
         return list;
     }
 
+    static Collection<Person> collectionPerson() {
+        Collection<Person> collection = new ArrayList();
+        collection.add(new Person("张三", 22, "男"));
+        collection.add(new Person("李四", 19, "女"));
+        collection.add(new Person("王五", 34, "男"));
+        collection.add(new Person("赵六", 30, "男"));
+        collection.add(new Person("田七", 25, "女"));
+        return collection;
+    }
+
     public static void main(String[] args) {
         System.out.println(CollectionUtil.listDistinct(Arrays.asList("1", "2", "2")));
         System.out.println(CollectionUtil.listFilerNull(CollectionUtil.listString()));
@@ -160,6 +180,7 @@ public class CollectionUtil {
         System.out.println(Arrays.toString(CollectionUtil.listToArrayByStream(Arrays.asList("1", "2", "3"))));
         System.out.println(CollectionUtil.listToStringAndCommaSeparated(Arrays.asList("Milan", "London", "New York", "San Francisco")));
         System.out.println(CollectionUtil.maxValueOfList(CollectionUtil.listInteger()));
+        System.out.println(CollectionUtil.collectionRemoveValue(CollectionUtil.collectionPerson()));
     }
 
 }
