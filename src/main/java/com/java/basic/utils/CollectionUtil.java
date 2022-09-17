@@ -143,6 +143,24 @@ public class CollectionUtil {
         return collection;
     }
 
+    /**
+     * List根据元素的某个字段去重
+     */
+    public static List<Person> listPersonDistinct(List<Person> personList) {
+        return personList.stream().collect(
+                Collectors.collectingAndThen(
+                        Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(Person::getName))), ArrayList::new));
+    }
+
+    /**
+     * List根据元素的多个字段去重
+     */
+    public static List<Person> listPersonMultiFieldDistinct(List<Person> personList) {
+        return personList.parallelStream()
+                .collect(Collectors.collectingAndThen(
+                        Collectors.toCollection(() -> new TreeSet<>(
+                                Comparator.comparing(person -> person.getName() + "#" + person.getAge()))), ArrayList::new));
+    }
 
     static List<String> listString() {
         List<String> list = new ArrayList<>();
@@ -171,6 +189,19 @@ public class CollectionUtil {
         return collection;
     }
 
+    static List<Person> listPerson() {
+        List<Person> personList = new ArrayList<>();
+        personList.add(new Person("one", 10, ""));
+        personList.add(new Person("two", 20, ""));
+        personList.add(new Person("three", 30, "男"));
+        // 这两的name值重复
+        personList.add(new Person("four", 40, ""));
+        personList.add(new Person("four", 42, ""));
+        // 多字段去重
+        personList.add(new Person("three", 30, "女"));
+        return personList;
+    }
+
     public static void main(String[] args) {
         System.out.println(CollectionUtil.listDistinct(Arrays.asList("1", "2", "2")));
         System.out.println(CollectionUtil.listFilerNull(CollectionUtil.listString()));
@@ -181,6 +212,8 @@ public class CollectionUtil {
         System.out.println(CollectionUtil.listToStringAndCommaSeparated(Arrays.asList("Milan", "London", "New York", "San Francisco")));
         System.out.println(CollectionUtil.maxValueOfList(CollectionUtil.listInteger()));
         System.out.println(CollectionUtil.collectionRemoveValue(CollectionUtil.collectionPerson()));
+        System.out.println(CollectionUtil.listPersonDistinct(CollectionUtil.listPerson()));
+        System.out.println(CollectionUtil.listPersonMultiFieldDistinct(CollectionUtil.listPerson()));
     }
 
 }
